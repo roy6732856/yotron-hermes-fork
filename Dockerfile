@@ -24,7 +24,10 @@ RUN set -eux; \
     # Keep ownership consistent with upstream image conventions
     chmod -R a+rX /opt/hermes /opt/yotron
 
-# Inherit entrypoint, default user, volume, exposed port from the base.
+# Inherit entrypoint, default user, volume from the base.
+# Hermes binds the API server to 8642 by default — declare so Zeabur routes here.
+EXPOSE 8642
+
 # Set the gateway-run command so the container starts as the messaging gateway
 # (Telegram + Lark + API server) rather than dropping into interactive CLI.
 CMD ["gateway", "run"]
