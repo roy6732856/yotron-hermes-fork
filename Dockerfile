@@ -24,5 +24,7 @@ RUN set -eux; \
     # Keep ownership consistent with upstream image conventions
     chmod -R a+rX /opt/hermes /opt/yotron
 
-# Inherit the rest from the base image — same entrypoint, same default user,
-# same volume, same exposed port.
+# Inherit entrypoint, default user, volume, exposed port from the base.
+# Set the gateway-run command so the container starts as the messaging gateway
+# (Telegram + Lark + API server) rather than dropping into interactive CLI.
+CMD ["gateway", "run"]
